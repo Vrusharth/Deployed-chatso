@@ -1,4 +1,5 @@
 import cloudinary from "../lib/cloudinary.js";
+import User from "../models/user.model.js";
 import Message from "../models/message.model.js"
 
 export const getUsersForSidebar = async(req,res)=>{
@@ -19,13 +20,13 @@ export const getMessages = async(req,res)=>{
         const {id: userToChatId}= req.params;
         const myId = req.user._id;
 
-        const messages = await MessageChannel.find({
+        const messages = await Message.find({
             $or:[
                 {senderId: myId, receiveId: userToChatId},
                 {receiveId: userToChatId, senderId: myId}
             ]
         })
-        res.status(200).json(message);
+        res.status(200).json(messages);
         
     } catch (error) {
         console.log("Error in getMessages controller: ", error.message);
@@ -38,6 +39,7 @@ export const sendMessage= async(req,res)=>{
         const {text, image} = req.body;
         const {id:receiverId } = req.params;
         const senderId = req.user._id;
+        let imageUrl;
 
         if(image){
             const uploadResponse = await cloudinary.uploader.upload(image);
