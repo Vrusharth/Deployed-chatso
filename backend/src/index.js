@@ -4,6 +4,7 @@ import authRoutes from "./routes/auth.route.js";
 import { connectDB } from "./lib/db.js";
 import messageRoutes from "./routes/message.route.js"
 import cookieParser from "cookie-parser"
+import cors from "cors"
 
 const app=express();
 app.use(express.json())
@@ -14,7 +15,7 @@ app.use(cors({
 }))
 
 app.use("/api/auth",authRoutes)
-app.use("/api/message",messageRoutes)
+app.use("/api/messages",messageRoutes)
 
 
 dotenv.config()
