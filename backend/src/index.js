@@ -26,8 +26,17 @@ app.use("/api/messages",messageRoutes)
 if(process.env.NODE_ENV==="production"){
     app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
-    app.get("*", (req,res)=>{
-        res.sendFile(path.join(__dirname,"../frontend","dist","index.html"))
+    // Catch-all handler: must be after all other routes
+    app.use((req, res, next) => {
+        // Skip if it's an API route
+        if (req.path.startsWith("/api")) {
+            return next();
+        }
+        // Skip if it's a static file request
+        if (req.path.includes(".") && !req.path.endsWith(".html")) {
+            return next();
+        }
+        res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
     })
 }
 
