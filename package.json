@@ -1,5 +1,21 @@
 {
-  "dependencies": {
-    "lucide-react": "^0.562.0"
-  }
+  "name": "deployed-chatso",
+  "version": "1.0.0",
+  "description": "A chatting web-Application implemented using MERN stack and socket.io",
+  "main": "index.js",
+  "scripts": {
+    "build":"npm install --prefix backend && npm install --prefix frontend && npm run build --prefix frontend",
+    "start":"npm run start --prefix backend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vrusharth/Deployed-chatso.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vrusharth/Deployed-chatso/issues"
+  },
+  "homepage": "https://github.com/Vrusharth/Deployed-chatso#readme"
 }
